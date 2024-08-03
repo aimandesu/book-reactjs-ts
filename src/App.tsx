@@ -2,6 +2,7 @@ import { Typography } from "@mui/material";
 import ResponsiveDrawer from "./components/ui/Drawer";
 import { DrawerClass } from "./data/drawerClass";
 import HomePage from "./pages/HomePage";
+import AddBook from "./pages/AddBook";
 
 function App() {
   const drawerItems: DrawerClass[] = [
@@ -11,7 +12,7 @@ function App() {
     },
     {
       Option_name: "Profile",
-      Content: <Typography paragraph>Profile Content</Typography>,
+      Content: <AddBook />,
     },
     {
       Option_name: " Setings",

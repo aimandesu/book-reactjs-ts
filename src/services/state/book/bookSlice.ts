@@ -1,4 +1,8 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit/react";
+import {
+  PayloadAction,
+  createAsyncThunk,
+  createSlice,
+} from "@reduxjs/toolkit/react";
 import { BookClass } from "../../../data/bookClass";
 import { bookMockData } from "../../../data/bookMockData";
 
@@ -19,6 +23,9 @@ const bookSlice: any = createSlice({
   initialState,
   reducers: {
     //some action here,
+    addBook: (state, action: PayloadAction<BookClass>) => {
+      state.data.push(action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -49,5 +56,7 @@ export const fetchBooks: any = createAsyncThunk("data/fetchBooks", async () => {
   // }));
   return bookMockData;
 });
+
+export const { addBook } = bookSlice.actions;
 
 export default bookSlice.reducer;
