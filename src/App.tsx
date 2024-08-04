@@ -1,26 +1,25 @@
-import { Typography } from "@mui/material";
 import ResponsiveDrawer from "./components/ui/Drawer";
 import { DrawerClass } from "./data/drawerClass";
-import HomePage from "./pages/HomePage";
-import AddBook from "./pages/AddBook";
+
+import { Content } from "./components/enum/drawer_enum";
 
 function App() {
   const drawerItems: DrawerClass[] = [
     {
       Option_name: "Home",
-      Content: <HomePage />,
+      Content: Content.HOME,
     },
     {
       Option_name: "Profile",
-      Content: <AddBook />,
+      Content: Content.PROFILE,
     },
     {
       Option_name: " Setings",
-      Content: <Typography paragraph>Settings Content</Typography>,
+      Content: Content.SETTINGS,
     },
     {
       Option_name: "Logout",
-      Content: <Typography paragraph>Logout Content</Typography>,
+      Content: Content.LOGOUT,
     },
   ];
   return (

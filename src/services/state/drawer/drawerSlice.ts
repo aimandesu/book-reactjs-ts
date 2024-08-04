@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { DrawerClass } from "../../../data/drawerClass";
+import { Content } from "../../../components/enum/drawer_enum";
 
 export interface DrawerState {
   currentContent: DrawerClass | null;
@@ -7,8 +8,8 @@ export interface DrawerState {
 
 const initialState: DrawerState = {
   currentContent: {
-    Option_name: "",
-    Content: null,
+    Option_name: "Home",
+    Content: Content.HOME,
   },
 };
 

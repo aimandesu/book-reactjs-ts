@@ -11,8 +11,10 @@ const HomePage = () => {
   const books: BookLoadState = useSelector((state: RootState) => state.data);
 
   useEffect(() => {
-    dispatch(fetchBooks());
-  }, [dispatch]);
+    if (!books.data || books.data.length === 0) {
+      dispatch(fetchBooks());
+    }
+  }, [dispatch, books.data]);
 
   return (
     <>

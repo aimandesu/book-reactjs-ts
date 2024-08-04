@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -20,6 +20,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../services/state/store";
 import { setContent } from "../../services/state/drawer/drawerSlice";
 import SearchBar from "../SearchBar";
+import { Content } from "../enum/drawer_enum";
+import HomePage from "../../pages/HomePage";
+import AddBook from "../../pages/AddBook";
 // import { DrawerState } from "../../services/state/drawer/drawerSlice";
 
 interface ResponsiveDrawerProps {
@@ -31,17 +34,17 @@ const drawerWidth = 240;
 export default function ResponsiveDrawer({
   drawerItems,
 }: ResponsiveDrawerProps) {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [isClosing, setIsClosing] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
 
   const currentContent: DrawerClass = useSelector(
     (state: RootState) => state.drawer.currentContent
   );
   const dispatch = useDispatch<AppDispatch>();
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(setContent(drawerItems[0]));
-  }, [dispatch]);
+  }, []);
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -158,7 +161,24 @@ export default function ResponsiveDrawer({
         }}
       >
         <Toolbar />
-        {currentContent.Content}
+        {
+          <>
+            {(() => {
+              switch (currentContent.Content) {
+                case Content.HOME:
+                  return <HomePage />;
+                case Content.PROFILE:
+                  return <AddBook />;
+                case Content.SETTINGS:
+                  return <h1>SETTING</h1>;
+                case Content.LOGOUT:
+                  return <h1>LOGOUT</h1>;
+                default:
+                  return null;
+              }
+            })()}
+          </>
+        }
       </Box>
     </Box>
   );

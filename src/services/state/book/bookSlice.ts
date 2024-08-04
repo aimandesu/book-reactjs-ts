@@ -32,10 +32,13 @@ const bookSlice: any = createSlice({
       .addCase(fetchBooks.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchBooks.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.data = action.payload;
-      })
+      .addCase(
+        fetchBooks.fulfilled,
+        (state, action: PayloadAction<BookClass[]>) => {
+          state.status = "succeeded";
+          state.data = action.payload;
+        }
+      )
       .addCase(fetchBooks.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
@@ -54,6 +57,7 @@ export const fetchBooks: any = createAsyncThunk("data/fetchBooks", async () => {
   //   createdAt: new Date(book.createdAt).toISOString(),
   //   updatedAt: new Date(book.updatedAt).toISOString(),
   // }));
+  // console.log(JSON.stringify(bookMockData));
   return bookMockData;
 });
 
